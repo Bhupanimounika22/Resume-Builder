@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Languages</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Languages</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div id="languages-container">
+                <div class="form-group language-group">
+                    <label for="language_0">Language</label>
+                    <input type="text" class="form-control language-input" id="language_0" name="languages" required>
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeLanguage(this)">Delete</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="addLanguage()">Add Language</button>
+            <button type="submit" class="btn btn-primary mt-3">Next</button>
+        </form>
+    </div>
+
+    <script>
+        let languageCounter = 1;
+
+        function addLanguage() {
+            const container = document.getElementById('languages-container');
+            const newLanguageGroup = document.createElement('div');
+            newLanguageGroup.classList.add('form-group', 'language-group');
+            newLanguageGroup.innerHTML = `<label for="language_${languageCounter}">Language</label>
+                                          <input type="text" class="form-control language-input" id="language_${languageCounter}" name="languages" required>
+                                          <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeLanguage(this)">Delete</button>`;
+            container.appendChild(newLanguageGroup);
+            languageCounter++;
+        }
+
+        function removeLanguage(button) {
+            const languageGroup = button.closest('.language-group');
+            languageGroup.remove();
+        }
+    </script>
+</body>
+</html>

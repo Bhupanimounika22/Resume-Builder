@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - {{ resume.first_name }} {{ resume.last_name }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding-top: 20px;
+        }
+        hr {
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .summary {
+            font-style: italic;
+        }
+        .card-header {
+            background-color: #f8f9fa;
+        }
+        .card-body {
+            background-color: #ffffff;
+        }
+        .section-title {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h1>{{ resume.first_name }} {{ resume.last_name }}</h1>
+                <p>{{ resume.domain }}</p>
+                <p>{{ resume.email }} || {{ resume.contact }} || {{ resume.linkedin_profile }} || {{ resume.address }}</p>
+            </div>
+            <div class="card-body">
+                <h2 class="section-title text-center">Summary</h2>
+                <p class="summary text-justify">{{ resume.summary }}</p>
+                <hr>
+                
+                <h2 class="section-title">Education</h2>
+                <ul>
+                    {% for education in educations %}
+                    <li>{{ education.schooling }} - {{ education.schooling_duration }}</li>
+                    <li>{{ education.intermediate }} - {{ education.intermediate_duration }}</li>
+                    <li>{{ education.btech }} ({{ education.branch }}) - {{ education.btech_duration }}</li>
+                    {% endfor %}
+                </ul>
+                <hr>
+                
+                <h2 class="section-title">Skills</h2>
+                <ul>
+                    {% for skill in skills %}
+                    <li>{{ skill.name }}</li>
+                    {% endfor %}
+                </ul>
+                <hr>
+                
+                <h2 class="section-title">Certificates</h2>
+                <ul>
+                    {% for certificate in certificates %}
+                    <li>{{ certificate.description }}</li>
+                    {% endfor %}
+                </ul>
+                <hr>
+                
+                <h2 class="section-title">Languages</h2>
+                <ul>
+                    {% for language in languages %}
+                    <li>{{ language.language }}</li>
+                    {% endfor %}
+                </ul>
+                <hr>
+                
+                <h2 class="section-title">Work Experience</h2>
+                <ul>
+                    {% for work_experience in work_experiences %}
+                    <li>{{ work_experience.company_name }} - {{ work_experience.position }} ({{ work_experience.duration }})</li>
+                    <p>{{ work_experience.description }}</p>
+                    {% endfor %}
+                </ul>
+                <hr>
+ 
+                <div class="text-center">
+                    
+                    <form action="{% url 'delete_resume' resume.id %}" method="POST" class="d-inline-block">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'create_resume' %}" class="btn btn-success">Create Resume</a>
+    </div> <br>
+    <div class="text-center">
+        <a href="{% url 'all_resumes' %}" class="btn btn-success">Go To See Your Resumes</a>
+    </div>
+
+</body>
+</html>

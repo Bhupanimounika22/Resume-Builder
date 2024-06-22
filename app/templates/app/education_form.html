@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Education Details</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="schooling">Schooling</label>
+                <input type="text" class="form-control" id="schooling" name="schooling" required>
+            </div>
+            <div class="form-group">
+                <label for="schooling_duration">Schooling Duration</label>
+                <input type="text" class="form-control" id="schooling_duration" name="schooling_duration" required>
+            </div>
+            <div class="form-group">
+                <label for="intermediate">Intermediate</label>
+                <input type="text" class="form-control" id="intermediate" name="intermediate" required>
+            </div>
+            <div class="form-group">
+                <label for="intermediate_duration">Intermediate Duration</label>
+                <input type="text" class="form-control" id="intermediate_duration" name="intermediate_duration" required>
+            </div>
+            <div class="form-group">
+                <label for="btech">B.Tech</label>
+                <input type="text" class="form-control" id="btech" name="btech" required>
+            </div>
+            <div class="form-group">
+                <label for="branch">Branch</label>
+                <input type="text" class="form-control" id="branch" name="branch" required>
+            </div>
+            <div class="form-group">
+                <label for="btech_duration">B.Tech Duration</label>
+                <input type="text" class="form-control" id="btech_duration" name="btech_duration" required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Next</button>
+        </form>
+    </div>
+</body>
+</html>

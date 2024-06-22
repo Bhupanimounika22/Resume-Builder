@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificates</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Certificates</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div id="certificates-container">
+                <div class="form-group certificate-group">
+                    <label for="certificate_0">Certificate Description</label>
+                    <input type="text" class="form-control certificate-input" id="certificate_0" name="certificates" required>
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeCertificate(this)">Delete</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="addCertificate()">Add Certificate</button>
+            <button type="submit" class="btn btn-primary mt-3">Next</button>
+        </form>
+    </div>
+
+    <script>
+        let certificateCounter = 1;
+
+        function addCertificate() {
+            const container = document.getElementById('certificates-container');
+            const newCertificateGroup = document.createElement('div');
+            newCertificateGroup.classList.add('form-group', 'certificate-group');
+            newCertificateGroup.innerHTML = `<label for="certificate_${certificateCounter}">Certificate Description</label>
+                                             <input type="text" class="form-control certificate-input" id="certificate_${certificateCounter}" name="certificates" required>
+                                             <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeCertificate(this)">Delete</button>`;
+            container.appendChild(newCertificateGroup);
+            certificateCounter++;
+        }
+
+        function removeCertificate(button) {
+            const certificateGroup = button.closest('.certificate-group');
+            certificateGroup.remove();
+        }
+    </script>
+</body>
+</html>

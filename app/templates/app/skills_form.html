@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Skills</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div id="skills-container">
+                <div class="form-group skill-group">
+                    <label for="skill_0">Skill Name</label>
+                    <input type="text" class="form-control skill-input" id="skill_0" name="skills" required>
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeSkill(this)">Delete</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="addSkill()">Add Skill</button>
+            <button type="submit" class="btn btn-primary mt-3">Next</button>
+        </form>
+    </div>
+
+    <script>
+        let skillCounter = 1;
+
+        function addSkill() {
+            const container = document.getElementById('skills-container');
+            const newSkillGroup = document.createElement('div');
+            newSkillGroup.classList.add('form-group', 'skill-group');
+            newSkillGroup.innerHTML = `<label for="skill_${skillCounter}">Skill Name</label>
+                                        <input type="text" class="form-control skill-input" id="skill_${skillCounter}" name="skills" required>
+                                        <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeSkill(this)">Delete</button>`;
+            container.appendChild(newSkillGroup);
+            skillCounter++;
+        }
+
+        function removeSkill(button) {
+            const skillGroup = button.closest('.skill-group');
+            skillGroup.remove();
+        }
+    </script>
+</body>
+</html>

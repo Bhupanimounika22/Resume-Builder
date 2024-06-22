@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Resumes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        hr {
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .summary {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">All Resumes</h1>
+        <div class="text-center">
+            <a href="{% url 'create_resume' %}" class="btn btn-success">Create Resume</a> <br> <br>
+            <a href="{% url 'home' %}">Home</a>  <br> <br>
+        </div>
+        {% for data in resume_data %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="card-title text-center">{{ data.resume.first_name }} {{ data.resume.last_name }}</h2>
+                    <p class="text-center">{{ data.resume.domain }}</p>
+                    <p class="text-center">{{ data.resume.email }} || {{ data.resume.contact }} || {{ data.resume.linkedin_profile }} || {{ data.resume.address }}</p>
+                </div>
+                <div class="card-body">
+                    <h3 class="text-center">Summary</h3>
+                    <p class="summary text-justify">{{ data.resume.summary }}</p>
+                    <hr>
+                    
+                    <h3>Education</h3>
+                    <ul>
+                        {% for education in data.educations %}
+                            <li>{{ education.schooling }} - {{ education.schooling_duration }}</li>
+                            <li>{{ education.intermediate }} - {{ education.intermediate_duration }}</li>
+                            <li>{{ education.btech }} ({{ education.branch }}) - {{ education.btech_duration }}</li>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+                    
+                    <h3>Skills</h3>
+                    <ul>
+                        {% for skill in data.skills %}
+                            <li>{{ skill.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+                    
+                    <h3>Certificates</h3>
+                    <ul>
+                        {% for certificate in data.certificates %}
+                            <li>{{ certificate.description }}</li>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+                    
+                    <h3>Languages</h3>
+                    <ul>
+                        {% for language in data.languages %}
+                            <li>{{ language.language }}</li>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+                    
+                    <h3>Work Experience</h3>
+                    <ul>
+                        {% for work_experience in data.work_experiences %}
+                            <li>{{ work_experience.company_name }} - {{ work_experience.position }} ({{ work_experience.duration }})</li>
+                            <p>{{ work_experience.description }}</p>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+                     
+
+                    <div class="text-center">
+                         <form action="{% url 'delete_resume' data.resume.id %}" method="POST" class="d-inline-block">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+     
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Experience</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Work Experience</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="duration">Duration</label>
+                <input type="text" class="form-control" id="duration" name="duration" required>
+            </div>
+            <div class="form-group">
+                <label for="company_name">Company Name</label>
+                <input type="text" class="form-control" id="company_name" name="company_name" required>
+            </div>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input type="text" class="form-control" id="position" name="position" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
