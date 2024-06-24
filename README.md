@@ -10,4 +10,4 @@ Welcome to the Resume Builder application! This project allows users to create a
 - Delete existing resumes
  
 
- 
+### Add Your Own Styling for Resume Templates
